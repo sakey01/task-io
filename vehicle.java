@@ -1,8 +1,13 @@
-//import java.util.Scanner;
-
-class exp{
-    String type = "car";
-    int age = 10;
-    String colour = "blue";
+abstract class vehicle{
+    
 }
-
+class car extends vehicle {
+    void drive(){
+        System.out.println("driving car");
+    }
+}
+class bike extends vehicle {
+    void drive(){
+        System.out.println("driving bike");
+    }
+}
