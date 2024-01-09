@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
-// Figure 4, source code for election (task 4)
+// Figure 4: source code for election (task 4)
 public class Election{
     public static void main(String[] args) {
         // initialisation
@@ -18,8 +18,8 @@ public class Election{
                 System.out.println("END");
                 break;
             }
-            // obtains the index of input if already the element is present votes
-            // and increment the corresponding index in count
+            /* obtains the index of 'input' if the element is present in votes
+            and increments the corresponding index in count */
             if (votes.contains(input)){
                 int j = votes.indexOf(input);
                 int i = count.get(j) + 1;
@@ -31,22 +31,24 @@ public class Election{
                 count.add(1);
             }    
         }
-        // using collections, the highest vote is stored
+        // using collections, the highest vote is stored in 'highestVote'
         int highestVote = Collections.max(count);
-        int x = 1;
+        int x = 0;
         int y = 0;
+        // goes through count and stores the index of the highest vote
         for (int k = 0; k < votes.size(); k++){
             System.out.println(votes.get(k) + " recieved " + count.get(k) + " votes");
-            // if there are multiple highest votes then the x is incremented
-            if (highestVote == count.get(k)){
-                ++x;
+            // if there are multiple highest votes then x is incremented
+            if (highestVote == count.get(k)) {
+                x++;
                 y = k;
             }
         }
+        // prints the person with the highest votes if they are unmatched
         if (x == 1) {
-            System.out.println(votes.get(y) + " is the winner with " + highestVote + " vote(s)");
-        }    
-        else if (x>1) {
+            System.out.println(votes.get(y) + " is the winner with " + highestVote + " votes(s)");
+        }
+        else {
             System.out.println("the votes are tied");
         }
     }       
