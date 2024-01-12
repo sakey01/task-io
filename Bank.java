@@ -1,6 +1,5 @@
 // Sheikh Ahmed, 33114212, programming, B.S.c Computer Science, Ikram Rehman
 
-// Figure 5: Source code of OOP (Task 5)
 import java.time.LocalDate;
 public class Bank{
     private int ID;
