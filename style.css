@@ -3,11 +3,9 @@
 :root {
     --black: rgb(0, 0, 0);
     --white: #f5f5f5;
-    --grey: rgb(182, 182, 182);
-    --purple: rgb(131, 58, 180);
-    --red: rgb(240,23,23);
-    --orange: rgb(255,197,118);
-    --light-orange: rgba(254,106,103,1);
+    --grey: #4a4a4a;
+    --light-grey: #a09c9c;
+   
 }
 
 * {
@@ -19,8 +17,9 @@ html {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     scroll-behavior: smooth;
+    background-color: var(--grey);
     color: var(--white);
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,197,118,1) 0%, rgba(254,106,103,1) 47.7%, rgba(240,23,23,1) 92.3% );
+    height: 100vh;
 }
 
 .flex {
@@ -36,9 +35,14 @@ html {
     justify-content: center;
 }
 
+.square-border {
+    border-radius: 0.2rem;
+    border: 1px solid var(--light-grey);
+}
+
 .round-border {
     border-radius: 1.5rem;
-    border: 1px solid white;
+    border: 1px solid var(--grey);
 }
 
 .padding-1x {
@@ -46,7 +50,7 @@ html {
 }
 
 .box-shadow {
-    box-shadow: 0 4px 4px var(--orange);
+    box-shadow: 0 4px 4px var(--grey);
 }
 
 .spacer {
@@ -60,18 +64,17 @@ h1 {
 button {
     font-size: 1.1rem;
     padding: 2vh 6vw;
-    background-color: var(--red);
+    background: transparent;
     color: var(--white);
     margin: 1rem;
 }
 
 button:hover {
-    background-color: var(--orange);
+    transform: scale(1.05);
 }
 
 #search-input {
     padding-left: 3rem;
-
 }
 
 #search-icon {
