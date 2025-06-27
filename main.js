@@ -2,34 +2,77 @@
 Create a simple to-do list app that allows users to search, add, edit, and delete items. Use local storage to store the data.
 */
 
-//search
-
-
-//add
-const task = document.querySelector("#task-input");
-const btn = document.querySelector("#btn");
+const addTask = document.querySelector("#add-task");
+const addbtn = document.querySelector("#addbtn");
 const list = document.querySelector("#list");
+const currItem = document.createElement("li");
 
-btn.addEventListener("click", function() {
-    const text = task.value.trim();
-
-    if (text !== "") {
-        const currItem = document.createElement("li");
-        currItem.innerHTML = text;
-        list.append(currItem);
-        task.value = "";
-    }   
+addTask.addEventListener("keydown", function(e) {
+    if(e.key === "Enter") addbtn.click();
 });
 
+currItem.addEventListener("click", () => {
+            currItem.style.textDecoration = "line-through";
+            currItem.style.backgroundColor = "grey";
+        });
 
-//edit
-function edit(id) {
-   
-}
+//add
+ addbtn.addEventListener("click", () => {
+    const text = addTask.value.trim();
+    console.log(typeof(lidt));
+
+
+    if (text !== "") {
+        currItem.innerHTML = text;
+        list.append(currItem);
+        addTask.value = "";
+
+        currItem.style.overflow = "hidden";
+
+        
+
+        //delete
+        const delbtn = document.createElement("button");
+        delbtn.innerHTML = "delete";
+        currItem.appendChild(delbtn);
+
+        delbtn.addEventListener("click", () => {
+            currItem.remove();
+            delbtn.remove();
+        })
+
+        //edit
+        const editbtn = document.createElement("button");
+        editbtn.innerHTML = "Edit";
+        currItem.appendChild(editbtn);
+
+        editbtn.addEventListener("click", () => {
+            const editTask = document.createElement("input");
+            editTask.value = text; 
+            
+            currItem.innerHTML = "";
+            currItem.appendChild(editTask);
+
+            const savebtn = document.createElement("button");
+            savebtn.textContent = "Save";
+            currItem.appendChild(savebtn);
+
+            savebtn.addEventListener("click", () => {
+                const newText = editTask.value;
+                editTask.remove();
+                currItem.innerHTML = newText;
+                savebtn.remove(); 
+
+                currItem.append(editbtn, delbtn);
+            })
+        })
+    } 
+}); 
 
 
 
-//delete
-function edit(id) {
-    
-}
+ 
+
+
+//search
+

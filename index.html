@@ -11,27 +11,23 @@
 
 <body>
     <header>
-        <div class="flex divide padding-1x spacer">
-            <h1>To-do List</h1>
-            <div id="search-bar" class="center">
+        <nav class="flex">
+            <h1 class="spacer">To Do List</h1>
+            <a href="#">
                 <i id="search-icon" class="material-icons">search</i>
-                <input id="search-input" type="text" placeholder="Search tasks..." class="round-border padding-1x"/>
-            </div>
+            </a>
+        </nav>
+        <div class="flex center">
+            <input id="add-task" type="text" placeholder="Add tasks..."/>
+            <button id="addbtn">Add</button>
         </div>
     </header>
 
     <main>
-        <section class="center">
-            <h2>Create a Task: </h2>
-            <div class="gap-1x flex center">
-                <input id="task-input" type="text" placeholder="Create task..." class="round-border" required>
-                <button id="btn" class="square-border box-shadow">Add</button>
-            </div>
-            <ul id="list">
-                <li></li>
-            </ul>
-        </section>
-    </main>
+        <ul id="list" class="border ul-margin box-shadow">
+            <span class=""><li id="li-example">Tidy the living room</li><button>Delete</button></span>
+        </ul>
+    </main> 
 
 </body>
     <script src="main.js"></script> 
