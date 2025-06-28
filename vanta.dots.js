@@ -3,14 +3,14 @@ VANTA.DOTS({
   mouseControls: true,
   touchControls: true,
   gyroControls: false,
-  minHeight: 200.00,
-  minWidth: 200.00,
-  scale: 1.00,
-  scaleMobile: 1.00,
+  minHeight: 200.0,
+  minWidth: 200.0,
+  scale: 1.0,
+  scaleMobile: 1.0,
   color: 0xf9f6f6,
   color2: 0xffffff,
   backgroundColor: 0x4a4a4a,
-  size: 2.00,
-  spacing: 15.00,
-  showLines: false
-})
+  size: 2.0,
+  spacing: 15.0,
+  showLines: false,
+});

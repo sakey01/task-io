@@ -1,121 +1,119 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 :root {
-    --black: rgb(0, 0, 0);
-    --white: #f5f5f5;
-    --grey: #4a4a4a;
-    --light-grey: #a09c9c;
+  --black: rgb(0, 0, 0);
+  --white: #f5f5f5;
+  --grey: #4a4a4a;
+  --light-grey: #a09c9c;
+  --lighter-grey: #a5a5a5;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    scroll-behavior: smooth;
-    background-color: var(--grey);
-    color: var(--white);
-    height: 100vh;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  scroll-behavior: smooth;
+  background-color: var(--grey);
+  color: var(--white);
+  height: 100vh;
 }
 
 .flex {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .center {
-    text-align: center;
-    justify-content: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .border {
-    border: 1px solid white;
+  border: 1px solid white;
 }
 
 .box-shadow {
-    box-shadow: 0 4px 4px var(--grey);
+  box-shadow: 0 4px 4px var(--grey);
 }
 
 .spacer {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
-.margin {
-    margin: 1rem;
+.spacer-4x {
+  margin-bottom: 4rem;
+}
+
+.margin, header {
+  margin: 1rem;
 }
 
 .ul-margin {
-    margin: 12rem;
-}
-
-header {
-    margin: 1rem;
+  margin: 12rem;
 }
 
 nav {
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem;
 }
 
 nav a {
-    color: var(--white);
+  color: var(--white);
 }
 
 #search-icon {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 h1 {
-    font-size: 2.6rem;
+  font-size: 2.6rem;
+}
+
+div input {
+  width: 60vw;
+}
+
+input {
+  cursor: text;
+  border: 1px solid var(--grey);
+  padding: 1rem;
+  color: var(--black);
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
+  border: 1px solid var(--grey);
+  padding: 1rem;
+  background-color: var(--light-grey);
+  color: var(--white);
+  width: 10vw;
 }
 
-#li-example {
-    text-decoration: line-through;
+button:hover {
+  background-color: var(--lighter-grey);
 }
 
 ul li {
-    cursor: pointer;
-    font-size: 1.2rem;
-    list-style: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  list-style: none;
 }
 
 ul li:hover {
-    font-size: 1.4rem;
-}
-
-ul li.checked {
-    background: #888;
-    color: #fff;
-    text-decoration: line-through;
-}
-
-ul li.checked::before {
-    content: '';
-    position: absolute;
-    border-color: #fff;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
+  font-size: 1.25rem;
 }
 
 li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid var(--white);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--white);
 }

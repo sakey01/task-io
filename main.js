@@ -5,82 +5,76 @@ Create a simple to-do list app that allows users to search, add, edit, and delet
 const addTask = document.querySelector("#add-task");
 const addbtn = document.querySelector("#addbtn");
 const list = document.querySelector("#list");
-const currItem = document.createElement("li");
 
-addTask.addEventListener("keydown", function(e) {
-    if(e.key === "Enter") addbtn.click();
+addTask.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") addbtn.click();
 });
 
-//add
- addbtn.addEventListener("click", () => {
-    const text = addTask.value.trim();
-    console.log(typeof(lidt));
+addbtn.addEventListener("click", () => {
+  const text = addTask.value.trim();
 
-    if (text !== "") {
-        const currItem = document.createElement("li");
-        currItem.innerHTML = text;
-        list.append(currItem);
-        addTask.value = "";
+  //add task
+  if (text !== "") {
+    const currItem = document.createElement("li");
+    currItem.innerHTML = text;
+    list.append(currItem);
+    addTask.value = "";
+    currItem.style.overflow = "hidden";
 
-        currItem.style.overflow = "hidden";
+    //delete task
+    const delbtn = document.createElement("button");
+    delbtn.innerHTML = "Delete";
+    currItem.appendChild(delbtn);
 
-        currItem.addEventListener("click", () => {
-            if (currItem.style.textDecoration === "line-through") {
-                currItem.style.textDecoration = "none";
-                currItem.style.backgroundColor = "transparent";
-            } else {
-                currItem.style.textDecoration = "line-through";
-                currItem.style.backgroundColor = "grey";
-            }
-        });
+    delbtn.addEventListener("click", () => {
+      currItem.remove();
+      delbtn.remove();
+    });
 
-        //delete
-        const delbtn = document.createElement("button");
-        delbtn.innerHTML = "delete";
-        currItem.appendChild(delbtn);
+    //edit task
+    const editbtn = document.createElement("button");
+    editbtn.innerHTML = "Edit";
+    currItem.appendChild(editbtn);
 
-        delbtn.addEventListener("click", () => {
-            currItem.remove();
-            delbtn.remove();
-        })
+    editbtn.addEventListener("click", () => {
+      const editTask = document.createElement("input");
+      editTask.value = text;
+      currItem.innerHTML = "";
+      currItem.appendChild(editTask);
 
-        //edit
-        const editbtn = document.createElement("button");
-        editbtn.innerHTML = "Edit";
-        currItem.appendChild(editbtn);
+      const savebtn = document.createElement("button");
+      savebtn.textContent = "Save";
+      currItem.appendChild(savebtn);
 
-        editbtn.addEventListener("click", () => {
-            const editTask = document.createElement("input");
-            editTask.value = text; 
-            
-            currItem.innerHTML = "";
-            currItem.appendChild(editTask);
+      savebtn.addEventListener("click", () => {
+        const newText = editTask.value;
+        currItem.innerHTML = newText;
+        currItem.append(editbtn, delbtn);
+      });
+    });
 
-            const savebtn = document.createElement("button");
-            savebtn.textContent = "Save";
-            currItem.appendChild(savebtn);
+    //text line through on click
+    currItem.addEventListener("click", () => {
+      if (currItem.style.textDecoration === "line-through") {
+        currItem.style.textDecoration = "none";
+        currItem.style.backgroundColor = "transparent";
+      } else {
+        currItem.style.textDecoration = "line-through";
+        currItem.style.backgroundColor = "grey";
+      }
+    });
+  }
+});
 
-            savebtn.addEventListener("click", () => {
-                const newText = editTask.value;
-                editTask.remove();
-                currItem.innerHTML = newText;
-                savebtn.remove(); 
-
-                currItem.append(editbtn, delbtn);
-            })
-        })
-    } 
-}); 
-
-//search
+//search tasks
 const search = document.querySelector("#search-icon");
 const nav = document.querySelector("nav");
 
 search.addEventListener("click", () => {
-    if (!document.querySelector("#search-bar")) {
-        const searchBar = document.createElement("input");
-        searchBar.id = "search-bar";
-        searchBar.placeholder = "Type here...";
-        nav.append(searchBar);
-    }
+  if (!document.querySelector("#search-bar")) {
+    const searchBar = document.createElement("input");
+    searchBar.id = "search-bar";
+    searchBar.placeholder = "Search for tasks";
+    nav.append(searchBar);
+  }
 });
