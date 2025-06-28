@@ -25,17 +25,17 @@ html {
 
 .flex {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
 }
 
 .center {
-  text-align: center;
   justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .border {
-  border: 1px solid white;
+  border: 1px solid var(--white);
 }
 
 .box-shadow {
@@ -43,7 +43,7 @@ html {
 }
 
 .padding {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .spacer {
@@ -54,15 +54,26 @@ html {
   margin-bottom: 4rem;
 }
 
-.margin, header {
+.margin {
   margin: 1rem;
 }
 
+/* Fix for header margin - separate selector */
+header {
+  margin: 1rem;
+}
+
+/* ul-margin with large margin — consider if needed */
 .ul-margin {
   margin: 12rem;
 }
 
+.hide {
+  display: none;
+}
+
 nav {
+  display: flex; /* add display flex */
   justify-content: space-between;
   align-items: center;
   margin: 0 1rem;
@@ -70,34 +81,37 @@ nav {
 
 nav a {
   color: var(--white);
+  text-decoration: none; /* optional for links */
 }
 
 #search-icon {
   font-size: 2rem;
+  cursor: pointer; /* add cursor pointer */
 }
 
-h1 {
-  font-size: 2.6rem;
-}
-
-div input {
-  width: 60vw;
-}
-
+/* You had div input selector, changed to a class for clarity */
+div input, /* this targets any input inside any div */
 input {
+  width: 60vw; /* only if you want this globally */
   cursor: text;
   padding: 1rem;
   border: 1px solid var(--grey);
   color: var(--black);
+  background-color: var(--white); /* add background for readability */
+  border-radius: 4px; /* optional, nicer edges */
 }
 
+/* Override width for buttons */
 button {
   cursor: pointer;
   border: 1px solid var(--grey);
   padding: 0.5rem;
   background-color: var(--light-grey);
   color: var(--white);
-  width: 10vw;
+  width: auto; /* changed from 10vw to auto for better sizing */
+  min-width: 80px; /* minimum width for buttons */
+  border-radius: 4px; /* optional */
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -108,16 +122,56 @@ ul li {
   cursor: pointer;
   font-size: 1.2rem;
   list-style: none;
+  padding: 1rem;
+  border: 1px solid var(--white);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: font-size 0.2s ease;
 }
 
 ul li:hover {
   font-size: 1.25rem;
 }
 
-li {
+/* If you want the "done" style from your JS */
+.done {
+  text-decoration: line-through;
+  background-color: grey;
+  color: var(--lighter-grey);
+}
+
+/* Search input styling */
+.search-input {
+  width: 200px !important;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--white);
+  background-color: var(--grey);
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: var(--light-grey);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--light-grey);
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.search-input:focus::placeholder {
+  color: var(--grey);
+}
+
+/* Search box container */
+#search-box {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--white);
 }

@@ -66,15 +66,70 @@ addbtn.addEventListener("click", () => {
   }
 });
 
+//store tasks
+const li = list.querySelectorAll("li");
+
+for (let i = 0; i < li.length; i++) {}
+
 //search tasks
 const search = document.querySelector("#search-icon");
-const nav = document.querySelector("nav");
+const searchBox = document.querySelector("#search-box");
 
 search.addEventListener("click", () => {
-  if (!document.querySelector("#search-bar")) {
-    const searchBar = document.createElement("input");
+  let searchBar = document.querySelector("#search-bar");
+
+  if (!searchBar) {
+    searchBar = document.createElement("input");
     searchBar.id = "search-bar";
-    searchBar.placeholder = "Search for tasks";
-    nav.append(searchBar);
+    searchBar.placeholder = "Search for tasks...";
+    searchBar.type = "text";
+    searchBar.className = "search-input";
+    searchBox.appendChild(searchBar);
+    
+    // Focus on the search bar when it appears
+    searchBar.focus();
+
+    searchBar.addEventListener("input", (e) => {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      const listItems = list.querySelectorAll("li");
+      
+      listItems.forEach((item) => {
+        const itemText = item.textContent.toLowerCase();
+        if (itemText.includes(searchTerm)) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+
+    // Close search when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!searchBox.contains(e.target)) {
+        searchBar.remove();
+      }
+    });
+
+    // Close search on Escape key
+    searchBar.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        searchBar.remove();
+        // Show all items when search is closed
+        const listItems = list.querySelectorAll("li");
+        listItems.forEach((item) => {
+          item.style.display = "flex";
+        });
+      }
+    });
+  } else {
+    searchBar.remove();
+
+    const listItems = list.querySelectorAll("li");
+    listItems.forEach((item) => {
+      item.style.display = "flex";
+    });
   }
 });
+
+/* to find an item you would first have to have a list, then attach that to memory and 
+connect that to the serach field*/
