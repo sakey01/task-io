@@ -89,6 +89,18 @@ nav a {
   cursor: pointer; /* add cursor pointer */
 }
 
+/* Remove grey background from search button */
+#search-box button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  min-width: auto;
+}
+
+#search-box button:hover {
+  background-color: transparent;
+}
+
 /* You had div input selector, changed to a class for clarity */
 div input, /* this targets any input inside any div */
 input {
