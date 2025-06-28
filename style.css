@@ -42,6 +42,10 @@ html {
   box-shadow: 0 4px 4px var(--grey);
 }
 
+.padding {
+    padding: 1rem;
+}
+
 .spacer {
   margin-bottom: 1rem;
 }
@@ -82,15 +86,15 @@ div input {
 
 input {
   cursor: text;
-  border: 1px solid var(--grey);
   padding: 1rem;
+  border: 1px solid var(--grey);
   color: var(--black);
 }
 
 button {
   cursor: pointer;
   border: 1px solid var(--grey);
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: var(--light-grey);
   color: var(--white);
   width: 10vw;
