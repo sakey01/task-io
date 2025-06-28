@@ -6,6 +6,77 @@ const addTask = document.querySelector("#add-task");
 const addbtn = document.querySelector("#addbtn");
 const list = document.querySelector("#list");
 
+// Set up the template list item
+const templateItem = document.querySelector("#example-li");
+if (templateItem) {
+  const text = templateItem.textContent;
+  
+  // Wrap text in span for line-through targeting
+  templateItem.innerHTML = `<span class="task-text">${text}</span>`;
+  
+  // Add edit button first
+  const editbtn = document.createElement("button");
+  editbtn.innerHTML = "Edit";
+  templateItem.appendChild(editbtn);
+
+  editbtn.addEventListener("click", () => {
+    const editTask = document.createElement("input");
+    editTask.value = text;
+    templateItem.innerHTML = "";
+    templateItem.appendChild(editTask);
+
+    const savebtn = document.createElement("button");
+    savebtn.textContent = "Save";
+    templateItem.appendChild(savebtn);
+
+    savebtn.addEventListener("click", () => {
+      const newText = editTask.value;
+      templateItem.innerHTML = `<span class="task-text">${newText}</span>`;
+      templateItem.append(editbtn, delbtn);
+    });
+  });
+
+  // Add delete button second
+  const delbtn = document.createElement("button");
+  delbtn.innerHTML = "Delete";
+  templateItem.appendChild(delbtn);
+
+  delbtn.addEventListener("click", () => {
+    templateItem.remove();
+    checkEmptyList();
+  });
+
+  // Make it selectable with line-through
+  templateItem.addEventListener("click", (e) => {
+    // Don't trigger if clicking on buttons
+    if (e.target.tagName === 'BUTTON') return;
+    
+    const textSpan = templateItem.querySelector('.task-text');
+    if (textSpan.style.textDecoration === "line-through") {
+      textSpan.style.textDecoration = "none";
+      templateItem.style.backgroundColor = "transparent";
+    } else {
+      textSpan.style.textDecoration = "line-through";
+      templateItem.style.backgroundColor = "grey";
+    }
+  });
+}
+
+// Function to check if list is empty and hide/show borders
+function checkEmptyList() {
+  const listItems = list.querySelectorAll("li");
+  if (listItems.length === 0) {
+    list.style.border = "none";
+    list.style.boxShadow = "none";
+  } else {
+    list.style.border = "";
+    list.style.boxShadow = "";
+  }
+}
+
+// Check initial state
+checkEmptyList();
+
 addTask.addEventListener("keydown", function (e) {
   if (e.key === "Enter") addbtn.click();
 });
@@ -16,20 +87,10 @@ addbtn.addEventListener("click", () => {
   //add task
   if (text !== "") {
     const currItem = document.createElement("li");
-    currItem.innerHTML = text;
+    currItem.innerHTML = `<span class="task-text">${text}</span>`;
     list.append(currItem);
     addTask.value = "";
     currItem.style.overflow = "hidden";
-
-    //delete task
-    const delbtn = document.createElement("button");
-    delbtn.innerHTML = "Delete";
-    currItem.appendChild(delbtn);
-
-    delbtn.addEventListener("click", () => {
-      currItem.remove();
-      delbtn.remove();
-    });
 
     //edit task
     const editbtn = document.createElement("button");
@@ -48,22 +109,38 @@ addbtn.addEventListener("click", () => {
 
       savebtn.addEventListener("click", () => {
         const newText = editTask.value;
-        currItem.innerHTML = newText;
+        currItem.innerHTML = `<span class="task-text">${newText}</span>`;
         currItem.append(editbtn, delbtn);
       });
     });
 
+    //delete task
+    const delbtn = document.createElement("button");
+    delbtn.innerHTML = "Delete";
+    currItem.appendChild(delbtn);
+
+    delbtn.addEventListener("click", () => {
+      currItem.remove();
+      checkEmptyList();
+    });
+
     //line through text on click
-    const li = list.querySelector("li");
-    currItem.addEventListener("click", () => {
-      if (currItem.style.textDecoration === "line-through") {
-        currItem.style.textDecoration = "none";
+    currItem.addEventListener("click", (e) => {
+      // Don't trigger if clicking on buttons
+      if (e.target.tagName === 'BUTTON') return;
+      
+      const textSpan = currItem.querySelector('.task-text');
+      if (textSpan.style.textDecoration === "line-through") {
+        textSpan.style.textDecoration = "none";
         currItem.style.backgroundColor = "transparent";
       } else {
-        currItem.style.textDecoration = "line-through";
+        textSpan.style.textDecoration = "line-through";
         currItem.style.backgroundColor = "grey";
       }
     });
+
+    // Show borders when adding first item
+    checkEmptyList();
   }
 });
 
@@ -102,6 +179,11 @@ search.addEventListener("click", () => {
     document.addEventListener("click", (e) => {
       if (!searchBox.contains(e.target)) {
         searchBar.remove();
+        
+        const listItems = list.querySelectorAll("li");
+        listItems.forEach((item) => {
+          item.style.display = "flex";
+        });
       }
     });
 
