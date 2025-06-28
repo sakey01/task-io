@@ -58,12 +58,10 @@ html {
   margin: 1rem;
 }
 
-/* Fix for header margin - separate selector */
 header {
   margin: 1rem;
 }
 
-/* ul-margin with large margin — consider if needed */
 .ul-margin {
   margin: 12rem;
 }
@@ -73,7 +71,7 @@ header {
 }
 
 nav {
-  display: flex; /* add display flex */
+  display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 1rem;
@@ -81,15 +79,14 @@ nav {
 
 nav a {
   color: var(--white);
-  text-decoration: none; /* optional for links */
+  text-decoration: none;
 }
 
 #search-icon {
   font-size: 2rem;
-  cursor: pointer; /* add cursor pointer */
+  cursor: pointer;
 }
 
-/* Remove grey background from search button */
 #search-box button {
   background-color: transparent;
   border: none;
@@ -101,28 +98,22 @@ nav a {
   background-color: transparent;
 }
 
-/* You had div input selector, changed to a class for clarity */
-div input, /* this targets any input inside any div */
+div input,
 input {
-  width: 60vw; /* only if you want this globally */
+  width: 60vw;
   cursor: text;
   padding: 1rem;
   border: 1px solid var(--grey);
   color: var(--black);
-  background-color: var(--white); /* add background for readability */
-  border-radius: 4px; /* optional, nicer edges */
 }
 
-/* Override width for buttons */
 button {
   cursor: pointer;
   border: 1px solid var(--grey);
   padding: 0.5rem;
   background-color: var(--light-grey);
   color: var(--white);
-  width: auto; /* changed from 10vw to auto for better sizing */
-  min-width: 80px; /* minimum width for buttons */
-  border-radius: 4px; /* optional */
+  min-width: 80px;
   transition: background-color 0.3s ease;
 }
 
@@ -146,22 +137,18 @@ ul li:hover {
   font-size: 1.25rem;
 }
 
-/* If you want the "done" style from your JS */
 .done {
   text-decoration: line-through;
   background-color: grey;
   color: var(--lighter-grey);
 }
 
-/* Search input styling */
 .search-input {
   width: 200px !important;
   margin-left: 1rem;
   padding: 0.5rem;
-  border: 1px solid var(--white);
   background-color: var(--grey);
   color: var(--white);
-  border-radius: 4px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
 }
@@ -177,11 +164,6 @@ ul li:hover {
   color: var(--black);
 }
 
-.search-input:focus::placeholder {
-  color: var(--grey);
-}
-
-/* Search box container */
 #search-box {
   position: relative;
   display: flex;

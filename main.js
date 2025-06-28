@@ -53,7 +53,8 @@ addbtn.addEventListener("click", () => {
       });
     });
 
-    //text line through on click
+    //line through text on click
+    const li = list.querySelector("li");
     currItem.addEventListener("click", () => {
       if (currItem.style.textDecoration === "line-through") {
         currItem.style.textDecoration = "none";
@@ -66,11 +67,6 @@ addbtn.addEventListener("click", () => {
   }
 });
 
-//store tasks
-const li = list.querySelectorAll("li");
-
-for (let i = 0; i < li.length; i++) {}
-
 //search tasks
 const search = document.querySelector("#search-icon");
 const searchBox = document.querySelector("#search-box");
@@ -81,18 +77,17 @@ search.addEventListener("click", () => {
   if (!searchBar) {
     searchBar = document.createElement("input");
     searchBar.id = "search-bar";
-    searchBar.placeholder = "Search for tasks...";
+    searchBar.placeholder = "Search tasks";
     searchBar.type = "text";
     searchBar.className = "search-input";
     searchBox.appendChild(searchBar);
-    
-    // Focus on the search bar when it appears
+
     searchBar.focus();
 
     searchBar.addEventListener("input", (e) => {
       const searchTerm = e.target.value.toLowerCase().trim();
       const listItems = list.querySelectorAll("li");
-      
+
       listItems.forEach((item) => {
         const itemText = item.textContent.toLowerCase();
         if (itemText.includes(searchTerm)) {
@@ -114,7 +109,7 @@ search.addEventListener("click", () => {
     searchBar.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         searchBar.remove();
-        // Show all items when search is closed
+
         const listItems = list.querySelectorAll("li");
         listItems.forEach((item) => {
           item.style.display = "flex";
@@ -130,6 +125,3 @@ search.addEventListener("click", () => {
     });
   }
 });
-
-/* to find an item you would first have to have a list, then attach that to memory and 
-connect that to the serach field*/
