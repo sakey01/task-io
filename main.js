@@ -13,18 +13,26 @@ if (exampleTask) {
   exampleTask.appendChild(editBtn);
 
   editBtn.addEventListener("click", () => {
-    const editBox = document.createElement("input");
-    editBox.value = taskText;
+    const editInput = document.createElement("input");
+    editInput.value = exampleTask.querySelector(".task-text").textContent;
     exampleTask.innerHTML = "";
-    exampleTask.appendChild(editBox);
+    exampleTask.appendChild(editInput);
 
     const saveBtn = document.createElement("button");
     saveBtn.textContent = "Save";
     exampleTask.appendChild(saveBtn);
 
+    //Add a 'enter key' for the edit box to save content
+    editInput.addEventListener("keydown", function (keyPress) {
+      if (keyPress.key === "Enter") saveBtn.click();
+    });
+
+    // Focus on the input so user can start typing immediately
+    editInput.focus();
+
     // When you click "Save", keep the new words
     saveBtn.addEventListener("click", () => {
-      const newWord = editBox.value;
+      const newWord = editInput.value;
       exampleTask.innerHTML = `<span class="task-text">${newWord}</span>`;
       exampleTask.append(editBtn, deleteBtn);
     });
@@ -59,15 +67,12 @@ if (exampleTask) {
   });
 }
 
-// This function hides the box around the list when there are no tasks
 function hideBorder() {
   const allTasks = taskList.querySelectorAll("li");
   if (allTasks.length === 0) {
-    // No tasks? Hide the box!
     taskList.style.border = "none";
     taskList.style.boxShadow = "none";
   } else {
-    // Has tasks? Show the box!
     taskList.style.border = "";
     taskList.style.boxShadow = "";
   }
@@ -90,13 +95,13 @@ taskInput.addEventListener("keydown", function (keyPress) {
 
 // When you click the Add button, add a new task
 addBtn.addEventListener("click", () => {
-  const newTaskWords = taskInput.value.trim(); // Get the words you typed
+  const newTaskWord = taskInput.value.trim(); // Get the words you typed
 
   // Only add a task if you actually typed something
-  if (newTaskWords !== "") {
+  if (newTaskWord !== "") {
     // Create a new task item
     const newTask = document.createElement("li");
-    newTask.innerHTML = `<span class="task-text">${newTaskWords}</span>`;
+    newTask.innerHTML = `<span class="task-text">${newTaskWord}</span>`;
     taskList.append(newTask);
     taskInput.value = ""; // Clear the input box
     newTask.style.overflow = "hidden";
@@ -108,17 +113,25 @@ addBtn.addEventListener("click", () => {
 
     // When you click "Edit", let you change the words
     editBtn.addEventListener("click", () => {
-      const editBox = document.createElement("input");
-      editBox.value = newTaskWords;
+      const editInput = document.createElement("input");
+      editInput.value = newTask.querySelector(".task-text").textContent;
       newTask.innerHTML = "";
-      newTask.appendChild(editBox);
+      newTask.appendChild(editInput);
 
       const saveBtn = document.createElement("button");
       saveBtn.textContent = "Save";
       newTask.appendChild(saveBtn);
 
+      //Add a 'enter key' for the edit box to save content
+      editInput.addEventListener("keydown", function (keyPress) {
+        if (keyPress.key === "Enter") saveBtn.click();
+      });
+
+      // Focus on the input so user can start typing immediately
+      editInput.focus();
+
       saveBtn.addEventListener("click", () => {
-        const newWord = editBox.value;
+        const newWord = editInput.value;
         newTask.innerHTML = `<span class="task-text">${newWord}</span>`;
         newTask.append(editBtn, deleteBtn);
       });
@@ -179,15 +192,26 @@ searchBtn.addEventListener("click", () => {
     searchInput.addEventListener("input", (e) => {
       const searchWords = e.target.value.toLowerCase().trim();
       const allTasks = taskList.querySelectorAll("li");
+      let visibleTasks = 0;
 
       allTasks.forEach((task) => {
         const taskWords = task.textContent.toLowerCase();
         if (taskWords.includes(searchWords)) {
           task.style.display = ""; // Show this task
+          visibleTasks++;
         } else {
           task.style.display = "none"; // Hide this task
         }
       });
+
+      // Hide border if no tasks are visible, show it if tasks are visible
+      if (visibleTasks === 0) {
+        taskList.style.border = "none";
+        taskList.style.boxShadow = "none";
+      } else {
+        taskList.style.border = "";
+        taskList.style.boxShadow = "";
+      }
     });
 
     // When you click outside the search box, close it

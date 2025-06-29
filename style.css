@@ -66,6 +66,10 @@ header {
   margin: 12vw;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -94,7 +98,6 @@ nav a {
   background-color: transparent;
 }
 
-div input,
 input {
   width: 60vw;
   cursor: text;
@@ -117,9 +120,14 @@ button:hover {
   background-color: var(--lighter-grey);
 }
 
+input,
+button,
+ul li {
+  font-size: 1.2rem;
+}
+
 ul li {
   cursor: pointer;
-  font-size: 1.2rem;
   list-style: none;
   padding: 1rem;
   border: 1px solid var(--white);
@@ -168,13 +176,16 @@ ul li:hover {
 }
 
 @media (max-width: 600px) {
-  html {
+  html,
+  input,
+  button,
+  ul li {
     font-size: 0.9rem;
   }
 
   input,
   button {
-    font-size: 0.8  rem;
+    font-size: 0.8 rem;
   }
 
   input {
@@ -182,7 +193,7 @@ ul li:hover {
   }
 
   button {
-    padding: 0.5rem 0.1rem;
+    max-width: 10vw;
   }
 
   .ul-margin {
