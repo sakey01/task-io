@@ -1,7 +1,6 @@
-const taskInput = document.querySelector("#add-task");
-const addButton = document.querySelector("#addbtn");
+const taskInput = document.querySelector("#add-task-input");
+const addBtn = document.querySelector("#addbtn");
 const taskList = document.querySelector("#list");
-
 
 const exampleTask = document.querySelector("#example-li");
 if (exampleTask) {
@@ -9,38 +8,37 @@ if (exampleTask) {
 
   exampleTask.innerHTML = `<span class="task-text">${taskText}</span>`;
 
-  const editButton = document.createElement("button");
-  editButton.innerHTML = "Edit";
-  exampleTask.appendChild(editButton);
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML = "Edit";
+  exampleTask.appendChild(editBtn);
 
-  
-  editButton.addEventListener("click", () => {
+  editBtn.addEventListener("click", () => {
     const editBox = document.createElement("input");
     editBox.value = taskText;
     exampleTask.innerHTML = "";
     exampleTask.appendChild(editBox);
 
-    const saveButton = document.createElement("button");
-    saveButton.textContent = "Save";
-    exampleTask.appendChild(saveButton);
+    const saveBtn = document.createElement("button");
+    saveBtn.textContent = "Save";
+    exampleTask.appendChild(saveBtn);
 
     // When you click "Save", keep the new words
-    saveButton.addEventListener("click", () => {
-      const newWords = editBox.value;
-      exampleTask.innerHTML = `<span class="task-text">${newWords}</span>`;
-      exampleTask.append(editButton, deleteButton);
+    saveBtn.addEventListener("click", () => {
+      const newWord = editBox.value;
+      exampleTask.innerHTML = `<span class="task-text">${newWord}</span>`;
+      exampleTask.append(editBtn, deleteBtn);
     });
   });
 
   // Make a "Delete" button
-  const deleteButton = document.createElement("button");
-  deleteButton.innerHTML = "Delete";
-  exampleTask.appendChild(deleteButton);
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = "Delete";
+  exampleTask.appendChild(deleteBtn);
 
   // When you click "Delete", remove the task
-  deleteButton.addEventListener("click", () => {
+  deleteBtn.addEventListener("click", () => {
     exampleTask.remove();
-    hideBordersIfNoTasks();
+    hideBorder();
   });
 
   // When you click on the words, draw a line through them (mark as done)
@@ -62,7 +60,7 @@ if (exampleTask) {
 }
 
 // This function hides the box around the list when there are no tasks
-function hideBordersIfNoTasks() {
+function hideBorder() {
   const allTasks = taskList.querySelectorAll("li");
   if (allTasks.length === 0) {
     // No tasks? Hide the box!
@@ -75,16 +73,23 @@ function hideBordersIfNoTasks() {
   }
 }
 
+function showTasks() {
+  const allTasks = taskList.querySelectorAll("li");
+  allTasks.forEach((task) => {
+    task.style.display = "";
+  });
+}
+
 // Check if we need to hide the box when the page first loads
-hideBordersIfNoTasks();
+hideBorder();
 
 // When you press Enter in the task input box, click the Add button
 taskInput.addEventListener("keydown", function (keyPress) {
-  if (keyPress.key === "Enter") addButton.click();
+  if (keyPress.key === "Enter") addBtn.click();
 });
 
 // When you click the Add button, add a new task
-addButton.addEventListener("click", () => {
+addBtn.addEventListener("click", () => {
   const newTaskWords = taskInput.value.trim(); // Get the words you typed
 
   // Only add a task if you actually typed something
@@ -97,38 +102,37 @@ addButton.addEventListener("click", () => {
     newTask.style.overflow = "hidden";
 
     // Make an "Edit" button for the new task
-    const editButton = document.createElement("button");
-    editButton.innerHTML = "Edit";
-    newTask.appendChild(editButton);
+    const editBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit";
+    newTask.appendChild(editBtn);
 
     // When you click "Edit", let you change the words
-    editButton.addEventListener("click", () => {
+    editBtn.addEventListener("click", () => {
       const editBox = document.createElement("input");
       editBox.value = newTaskWords;
       newTask.innerHTML = "";
       newTask.appendChild(editBox);
 
-      const saveButton = document.createElement("button");
-      saveButton.textContent = "Save";
-      newTask.appendChild(saveButton);
+      const saveBtn = document.createElement("button");
+      saveBtn.textContent = "Save";
+      newTask.appendChild(saveBtn);
 
-      // When you click "Save", keep the new words
-      saveButton.addEventListener("click", () => {
-        const newWords = editBox.value;
-        newTask.innerHTML = `<span class="task-text">${newWords}</span>`;
-        newTask.append(editButton, deleteButton);
+      saveBtn.addEventListener("click", () => {
+        const newWord = editBox.value;
+        newTask.innerHTML = `<span class="task-text">${newWord}</span>`;
+        newTask.append(editBtn, deleteBtn);
       });
     });
 
     // Make a "Delete" button for the new task
-    const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "Delete";
-    newTask.appendChild(deleteButton);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "Delete";
+    newTask.appendChild(deleteBtn);
 
     // When you click "Delete", remove the task
-    deleteButton.addEventListener("click", () => {
+    deleteBtn.addEventListener("click", () => {
       newTask.remove();
-      hideBordersIfNoTasks();
+      hideBorder();
     });
 
     // When you click on the words, draw a line through them (mark as done)
@@ -149,37 +153,37 @@ addButton.addEventListener("click", () => {
     });
 
     // Show the box around the list since we now have a task
-    hideBordersIfNoTasks();
+    hideBorder();
   }
 });
 
 // Search for tasks
-const searchButton = document.querySelector("#search-icon");
-const searchContainer = document.querySelector("#search-box");
+const searchBtn = document.querySelector("#search-icon");
+const searchContainer = document.querySelector("#search-container");
 
-searchButton.addEventListener("click", () => {
-  let searchBox = document.querySelector("#search-bar");
+searchBtn.addEventListener("click", () => {
+  let searchInput = document.querySelector("#search-bar");
 
   // If there's no search box, make one
-  if (!searchBox) {
-    searchBox = document.createElement("input");
-    searchBox.id = "search-bar";
-    searchBox.placeholder = "Search tasks";
-    searchBox.type = "text";
-    searchBox.className = "search-input";
-    searchContainer.appendChild(searchBox);
+  if (!searchInput) {
+    searchInput = document.createElement("input");
+    searchInput.id = "search-bar";
+    searchInput.placeholder = "Search tasks";
+    searchInput.type = "text";
+    searchInput.className = "search-input";
+    searchContainer.appendChild(searchInput);
 
-    searchBox.focus(); // Put the cursor in the search box
+    searchInput.focus();
 
     // When you type in the search box, show only matching tasks
-    searchBox.addEventListener("input", (typeEvent) => {
-      const searchWords = typeEvent.target.value.toLowerCase().trim();
+    searchInput.addEventListener("input", (e) => {
+      const searchWords = e.target.value.toLowerCase().trim();
       const allTasks = taskList.querySelectorAll("li");
 
       allTasks.forEach((task) => {
         const taskWords = task.textContent.toLowerCase();
         if (taskWords.includes(searchWords)) {
-          task.style.display = "flex"; // Show this task
+          task.style.display = ""; // Show this task
         } else {
           task.style.display = "none"; // Hide this task
         }
@@ -189,36 +193,21 @@ searchButton.addEventListener("click", () => {
     // When you click outside the search box, close it
     document.addEventListener("click", (clickEvent) => {
       if (!searchContainer.contains(clickEvent.target)) {
-        searchBox.remove();
-
-        // Show all tasks again when search is closed
-        const allTasks = taskList.querySelectorAll("li");
-        allTasks.forEach((task) => {
-          task.style.display = "flex";
-        });
+        searchInput.remove();
+        showTasks();
       }
     });
 
     // When you press Escape, close the search
-    searchBox.addEventListener("keydown", (keyPress) => {
+    searchInput.addEventListener("keydown", (keyPress) => {
       if (keyPress.key === "Escape") {
-        searchBox.remove();
-
-        // Show all tasks again
-        const allTasks = taskList.querySelectorAll("li");
-        allTasks.forEach((task) => {
-          task.style.display = "flex";
-        });
+        searchInput.remove();
+        showTasks();
       }
     });
   } else {
     // If there's already a search box, close it
-    searchBox.remove();
-
-    // Show all tasks again
-    const allTasks = taskList.querySelectorAll("li");
-    allTasks.forEach((task) => {
-      task.style.display = "flex";
-    });
+    searchInput.remove();
+    showTasks();
   }
 });

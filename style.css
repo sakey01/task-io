@@ -63,11 +63,7 @@ header {
 }
 
 .ul-margin {
-  margin: 12rem;
-}
-
-.hide {
-  display: none;
+  margin: 12vw;
 }
 
 nav {
@@ -87,14 +83,14 @@ nav a {
   cursor: pointer;
 }
 
-#search-box button {
+#search-container button {
   background-color: transparent;
   border: none;
   padding: 0;
   min-width: auto;
 }
 
-#search-box button:hover {
+#search-container button:hover {
   background-color: transparent;
 }
 
@@ -131,6 +127,7 @@ ul li {
   align-items: center;
   gap: 1rem;
   transition: font-size 0.2s ease;
+  overflow: hidden;
 }
 
 ul li:hover {
@@ -144,7 +141,7 @@ ul li:hover {
 }
 
 .search-input {
-  width: 200px !important;
+  width: 200px;
   margin-left: 1rem;
   padding: 0.5rem;
   background-color: var(--grey);
@@ -164,8 +161,31 @@ ul li:hover {
   color: var(--black);
 }
 
-#search-box {
+#search-container {
   position: relative;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 0.9rem;
+  }
+
+  input,
+  button {
+    font-size: 0.8  rem;
+  }
+
+  input {
+    width: 60vw;
+  }
+
+  button {
+    padding: 0.5rem 0.1rem;
+  }
+
+  .ul-margin {
+    margin: 8vw;
+  }
 }
