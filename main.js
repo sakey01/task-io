@@ -1,75 +1,117 @@
+/*
+  Create a simple to-do list app that allows users to search, add, edit, and delete items. Use local
+  storage to store the data.
+*/
 const taskInput = document.querySelector("#add-task-input");
 const addBtn = document.querySelector("#addbtn");
 const taskList = document.querySelector("#list");
+const searchBtn = document.querySelector("#search-icon");
+const searchContainer = document.querySelector("#search-container");
 
+// Example task setup
 const exampleTask = document.querySelector("#example-li");
 if (exampleTask) {
-  const taskText = exampleTask.textContent;
+  setupTask(exampleTask);
+}
 
-  exampleTask.innerHTML = `<span class="task-text">${taskText}</span>`;
+// Add new task when button is clicked
+addBtn.addEventListener("click", addNewTask);
 
+// Add new task when Enter is pressed
+taskInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addNewTask();
+});
+
+// Search functionality
+searchBtn.addEventListener("click", toggleSearch);
+
+// Function to add a new task
+function addNewTask() {
+  const taskText = taskInput.value.trim();
+
+  if (taskText === "") return;
+
+  // Create new task element
+  const newTask = document.createElement("li");
+  newTask.innerHTML = `<span class="task-text">${taskText}</span>`;
+  taskList.appendChild(newTask);
+
+  taskInput.value = "";
+
+  setupTask(newTask);
+
+  updateBorder();
+}
+
+function setupTask(task) {
+  // Create edit button
   const editBtn = document.createElement("button");
-  editBtn.innerHTML = "Edit";
-  exampleTask.appendChild(editBtn);
+  editBtn.textContent = "Edit";
+  task.appendChild(editBtn);
+
+  // Create delete button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  task.appendChild(deleteBtn);
 
   editBtn.addEventListener("click", () => {
+    const currentText = task.querySelector(".task-text").textContent;
+
     const editInput = document.createElement("input");
-    editInput.value = exampleTask.querySelector(".task-text").textContent;
-    exampleTask.innerHTML = "";
-    exampleTask.appendChild(editInput);
+    editInput.value = currentText;
+    task.innerHTML = "";
+    task.appendChild(editInput);
 
     const saveBtn = document.createElement("button");
     saveBtn.textContent = "Save";
-    exampleTask.appendChild(saveBtn);
+    task.appendChild(saveBtn);
 
-    //Add a 'enter key' for the edit box to save content
-    editInput.addEventListener("keydown", function (keyPress) {
-      if (keyPress.key === "Enter") saveBtn.click();
-    });
-
-    // Focus on the input so user can start typing immediately
     editInput.focus();
 
-    // When you click "Save", keep the new words
-    saveBtn.addEventListener("click", () => {
-      const newWord = editInput.value;
-      exampleTask.innerHTML = `<span class="task-text">${newWord}</span>`;
-      exampleTask.append(editBtn, deleteBtn);
+    // Save when Enter is pressed
+    editInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") saveEdit();
     });
-  });
 
-  // Make a "Delete" button
-  const deleteBtn = document.createElement("button");
-  deleteBtn.innerHTML = "Delete";
-  exampleTask.appendChild(deleteBtn);
+    saveBtn.addEventListener("click", saveEdit);
 
-  // When you click "Delete", remove the task
-  deleteBtn.addEventListener("click", () => {
-    exampleTask.remove();
-    hideBorder();
-  });
-
-  // When you click on the words, draw a line through them (mark as done)
-  exampleTask.addEventListener("click", (clickEvent) => {
-    // Don't do anything if you clicked on a button
-    if (clickEvent.target.tagName === "BUTTON") return;
-
-    const wordsBox = exampleTask.querySelector(".task-text");
-    if (wordsBox.style.textDecoration === "line-through") {
-      // Remove the line and grey color
-      wordsBox.style.textDecoration = "none";
-      exampleTask.style.backgroundColor = "transparent";
-    } else {
-      // Draw a line through the words and make it grey
-      wordsBox.style.textDecoration = "line-through";
-      exampleTask.style.backgroundColor = "grey";
+    function saveEdit() {
+      const newText = editInput.value;
+      task.innerHTML = `<span class="task-text">${newText}</span>`;
+      task.append(editBtn, deleteBtn);
+      storeTasks(); // Save after editing
     }
+  });
+
+  deleteBtn.addEventListener("click", () => {
+    task.remove();
+    updateBorder();
+    storeTasks(); // Save after deleting
+  });
+
+  task.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") return;
+
+    const taskText = task.querySelector(".task-text");
+    const checked = taskText.style.textDecoration === "line-through";
+
+    if (checked) {
+      taskText.style.textDecoration = "none";
+      task.style.backgroundColor = "transparent";
+    } else {
+      taskText.style.textDecoration = "line-through";
+      task.style.backgroundColor = "grey";
+    }
+    
+    storeTasks(); // Save after marking as done/undone
   });
 }
 
-function hideBorder() {
-  const allTasks = taskList.querySelectorAll("li");
-  if (allTasks.length === 0) {
+// Function to show/hide border based on number of tasks
+function updateBorder() {
+  const tasks = taskList.querySelectorAll("li");
+
+  if (tasks.length === 0) {
     taskList.style.border = "none";
     taskList.style.boxShadow = "none";
   } else {
@@ -78,134 +120,48 @@ function hideBorder() {
   }
 }
 
-function showTasks() {
-  const allTasks = taskList.querySelectorAll("li");
-  allTasks.forEach((task) => {
+function showAllTasks() {
+  const tasks = taskList.querySelectorAll("li");
+  tasks.forEach((task) => {
     task.style.display = "";
   });
 }
 
-// Check if we need to hide the box when the page first loads
-hideBorder();
-
-// When you press Enter in the task input box, click the Add button
-taskInput.addEventListener("keydown", function (keyPress) {
-  if (keyPress.key === "Enter") addBtn.click();
-});
-
-// When you click the Add button, add a new task
-addBtn.addEventListener("click", () => {
-  const newTaskWord = taskInput.value.trim(); // Get the words you typed
-
-  // Only add a task if you actually typed something
-  if (newTaskWord !== "") {
-    // Create a new task item
-    const newTask = document.createElement("li");
-    newTask.innerHTML = `<span class="task-text">${newTaskWord}</span>`;
-    taskList.append(newTask);
-    taskInput.value = ""; // Clear the input box
-    newTask.style.overflow = "hidden";
-
-    // Make an "Edit" button for the new task
-    const editBtn = document.createElement("button");
-    editBtn.innerHTML = "Edit";
-    newTask.appendChild(editBtn);
-
-    // When you click "Edit", let you change the words
-    editBtn.addEventListener("click", () => {
-      const editInput = document.createElement("input");
-      editInput.value = newTask.querySelector(".task-text").textContent;
-      newTask.innerHTML = "";
-      newTask.appendChild(editInput);
-
-      const saveBtn = document.createElement("button");
-      saveBtn.textContent = "Save";
-      newTask.appendChild(saveBtn);
-
-      //Add a 'enter key' for the edit box to save content
-      editInput.addEventListener("keydown", function (keyPress) {
-        if (keyPress.key === "Enter") saveBtn.click();
-      });
-
-      // Focus on the input so user can start typing immediately
-      editInput.focus();
-
-      saveBtn.addEventListener("click", () => {
-        const newWord = editInput.value;
-        newTask.innerHTML = `<span class="task-text">${newWord}</span>`;
-        newTask.append(editBtn, deleteBtn);
-      });
-    });
-
-    // Make a "Delete" button for the new task
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "Delete";
-    newTask.appendChild(deleteBtn);
-
-    // When you click "Delete", remove the task
-    deleteBtn.addEventListener("click", () => {
-      newTask.remove();
-      hideBorder();
-    });
-
-    // When you click on the words, draw a line through them (mark as done)
-    newTask.addEventListener("click", (clickEvent) => {
-      // Don't do anything if you clicked on a button
-      if (clickEvent.target.tagName === "BUTTON") return;
-
-      const wordsBox = newTask.querySelector(".task-text");
-      if (wordsBox.style.textDecoration === "line-through") {
-        // Remove the line and grey color
-        wordsBox.style.textDecoration = "none";
-        newTask.style.backgroundColor = "transparent";
-      } else {
-        // Draw a line through the words and make it grey
-        wordsBox.style.textDecoration = "line-through";
-        newTask.style.backgroundColor = "grey";
-      }
-    });
-
-    // Show the box around the list since we now have a task
-    hideBorder();
-  }
-});
-
-// Search for tasks
-const searchBtn = document.querySelector("#search-icon");
-const searchContainer = document.querySelector("#search-container");
-
-searchBtn.addEventListener("click", () => {
+function toggleSearch() {
   let searchInput = document.querySelector("#search-bar");
 
-  // If there's no search box, make one
-  if (!searchInput) {
+  if (searchInput) {
+    // Close search
+    searchInput.remove();
+    showAllTasks();
+    updateBorder();
+  } else {
+    // Open search
     searchInput = document.createElement("input");
     searchInput.id = "search-bar";
     searchInput.placeholder = "Search tasks";
-    searchInput.type = "text";
     searchInput.className = "search-input";
     searchContainer.appendChild(searchInput);
 
     searchInput.focus();
 
-    // When you type in the search box, show only matching tasks
+    // Search as you type
     searchInput.addEventListener("input", (e) => {
-      const searchWords = e.target.value.toLowerCase().trim();
-      const allTasks = taskList.querySelectorAll("li");
-      let visibleTasks = 0;
+      const searchTerm = e.target.value.toLowerCase().trim();
+      const tasks = taskList.querySelectorAll("li");
+      let liCount = 0;
 
-      allTasks.forEach((task) => {
-        const taskWords = task.textContent.toLowerCase();
-        if (taskWords.includes(searchWords)) {
-          task.style.display = ""; // Show this task
-          visibleTasks++;
+      tasks.forEach((task) => {
+        const taskText = task.textContent.toLowerCase();
+        if (taskText.includes(searchTerm)) {
+          task.style.display = "";
+          liCount++;
         } else {
-          task.style.display = "none"; // Hide this task
+          task.style.display = "none";
         }
       });
 
-      // Hide border if no tasks are visible, show it if tasks are visible
-      if (visibleTasks === 0) {
+      if (liCount === 0) {
         taskList.style.border = "none";
         taskList.style.boxShadow = "none";
       } else {
@@ -214,24 +170,80 @@ searchBtn.addEventListener("click", () => {
       }
     });
 
-    // When you click outside the search box, close it
-    document.addEventListener("click", (clickEvent) => {
-      if (!searchContainer.contains(clickEvent.target)) {
+    // Close search when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!searchContainer.contains(e.target)) {
         searchInput.remove();
-        showTasks();
+        showAllTasks();
+        updateBorder();
       }
     });
 
-    // When you press Escape, close the search
-    searchInput.addEventListener("keydown", (keyPress) => {
-      if (keyPress.key === "Escape") {
+    // Close search with Escape key
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
         searchInput.remove();
-        showTasks();
+        showAllTasks();
+        updateBorder();
       }
     });
-  } else {
-    // If there's already a search box, close it
-    searchInput.remove();
-    showTasks();
+  }
+}
+
+// Function to save tasks to local storage
+function storeTasks() {
+  const tasks = taskList.querySelectorAll("li");
+  const taskData = [];
+
+  tasks.forEach(task => {
+    const taskText = task.querySelector(".task-text").textContent;
+    const checked = task.querySelector(".task-text").style.textDecoration === "line-through";
+    
+    taskData.push({
+      text: taskText,
+      done: checked
+    });
+  });
+
+  localStorage.setItem("userTasks", JSON.stringify(taskData));
+}
+
+// Function to load tasks from local storage
+function getTasks() {
+  const savedTasks = localStorage.getItem("userTasks");
+
+  if (savedTasks) {
+    const taskData = JSON.parse(savedTasks);
+
+    taskList.innerHTML = "";
+
+    taskData.forEach(task => {
+      const newTask = document.createElement("li");
+      newTask.innerHTML = `<span class="task-text">${task.text}</span>`;
+
+      if (task.done) {
+        newTask.querySelector(".task-text").style.textDecoration = "line-through";
+        newTask.style.backgroundColor = "grey";
+      }
+
+      taskList.appendChild(newTask);
+      setupTask(newTask);
+    });
+  }
+}
+
+// Load tasks when page loads
+getTasks();
+
+// Save tasks whenever they change
+function saveTasksOnChange() {
+  storeTasks();
+}
+
+// Add event listeners to save tasks when they change
+addBtn.addEventListener("click", saveTasksOnChange);
+taskInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    setTimeout(saveTasksOnChange, 100);
   }
 });

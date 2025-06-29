@@ -17,7 +17,6 @@
 html {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
-  scroll-behavior: smooth;
   background-color: var(--grey);
   color: var(--white);
   height: 100vh;
@@ -32,14 +31,6 @@ html {
   justify-content: center;
   text-align: center;
   align-items: center;
-}
-
-.border {
-  border: 1px solid var(--white);
-}
-
-.box-shadow {
-  box-shadow: 0 4px 4px var(--grey);
 }
 
 .padding {
@@ -62,24 +53,22 @@ header {
   margin: 1rem;
 }
 
-.ul-margin {
-  margin: 12vw;
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  min-height: 4em;
 }
 
 h1 {
   font-size: 2rem;
 }
 
-nav {
+#search-container {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 0 1rem;
-}
-
-nav a {
-  color: var(--white);
-  text-decoration: none;
 }
 
 #search-icon {
@@ -87,69 +76,9 @@ nav a {
   cursor: pointer;
 }
 
-#search-container button {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  min-width: auto;
-}
-
-#search-container button:hover {
-  background-color: transparent;
-}
-
-input {
-  width: 60vw;
-  cursor: text;
-  padding: 1rem;
-  border: 1px solid var(--grey);
-  color: var(--black);
-}
-
-button {
-  cursor: pointer;
-  border: 1px solid var(--grey);
-  padding: 0.5rem;
-  background-color: var(--light-grey);
-  color: var(--white);
-  min-width: 80px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: var(--lighter-grey);
-}
-
-input,
-button,
-ul li {
-  font-size: 1.2rem;
-}
-
-ul li {
-  cursor: pointer;
-  list-style: none;
-  padding: 1rem;
-  border: 1px solid var(--white);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  transition: font-size 0.2s ease;
-  overflow: hidden;
-}
-
-ul li:hover {
-  font-size: 1.25rem;
-}
-
-.done {
-  text-decoration: line-through;
-  background-color: grey;
-  color: var(--lighter-grey);
-}
-
 .search-input {
   width: 200px;
+  max-width: 40vw;
   margin-left: 1rem;
   padding: 0.5rem;
   background-color: var(--grey);
@@ -169,13 +98,67 @@ ul li:hover {
   color: var(--black);
 }
 
-#search-container {
-  position: relative;
+input {
+  width: 60vw;
+  padding: 1rem;
+  border: 1px solid var(--grey);
+  color: var(--black);
+  font-size: 1.2rem;
+  cursor: text;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--grey);
+  padding: 0.5rem;
+  background-color: var(--light-grey);
+  color: var(--white);
+  min-width: 80px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--lighter-grey);
+}
+
+#list {
+  margin: 12vw;
+  border: 1px solid var(--white);
+  box-shadow: 0 4px 4px var(--grey);
+}
+
+ul li {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem;
+  border: 1px solid var(--white);
   display: flex;
   align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+  transition: font-size 0.2s ease;
+  overflow: hidden;
+}
+
+ul li:hover {
+  font-size: 1.25rem;
+}
+
+ul li input {
+  background: transparent;
+  color: var(--white);
 }
 
 @media (max-width: 600px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #search-icon {
+    font-size: 1.6rem;
+  }
+
   html,
   input,
   button,
@@ -183,20 +166,11 @@ ul li:hover {
     font-size: 0.9rem;
   }
 
-  input,
-  button {
-    font-size: 0.8 rem;
-  }
-
   input {
     width: 60vw;
   }
 
   button {
-    max-width: 10vw;
-  }
-
-  .ul-margin {
-    margin: 8vw;
+    max-width: 60vw;
   }
 }
