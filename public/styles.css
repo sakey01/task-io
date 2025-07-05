@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: whitesmoke;
+  --black: black;
+  --grey: #b3b3b3;
+  --cream: #fff4e1;
+  --blue: #a3bffa;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow: hidden;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  background: no-repeat linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
+  color: var(--cream);
+}
+
+body {
+  height: 100vh;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+nav {
+  padding: 1em;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+  align-items: center;
+}
+
+nav div {
+  display: flex;
+  align-items: center;
+}
+
+nav i,
+button {
+  cursor: pointer;
+}
+
+#search-icon {
+  position: absolute;
+  right: 10px;
+  opacity: 0.8;
+}
+
+main {
+  display: grid;
+  gap: 2em;
+  margin-top: 10%;
+  place-items: center;
+}
+
+input {
+  background-color: transparent;
+  color: var(--cream);
+  border: 1px solid var(--cream);
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: var(--cream);
+  opacity: 0.7;
+}
+
+input:focus {
+  border: 1px solid black;
+}
+
+div input {
+  padding: 1em;
+}
+
+div button {
+  font-size: 1rem;
+  padding: 1em;
+  background-color: var(--cream);
+  border: none;
+}
+
+.container {
+  display: flex;
+  position: relative;
+}
+
+ul {
+  display: grid;
+  place-items: center;
+  list-style: none;
+  gap: 1rem;
+}
+
+ul li {
+  padding: 1em;
+  border: 2px solid var(--cream);
+  border-radius: 2em;
+  width: 40vw;
+  color: var(--cream);
+}
+
+.icon-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.material-icons {
+  font-size: 1.8rem;
+  background: none;
+  color: var(--cream);
+}
