@@ -42,36 +42,41 @@ function makeTask() {
   });
 
   edit.addEventListener("click", () => {
-    const taskText = task.querySelector('.task-li');
+    const taskText = task.querySelector(".task-li");
     const currentText = taskText.textContent;
-    const input = document.createElement('input');
-    input.type = 'text';
+    const prevText = currentText;
+    const input = document.createElement("input");
+    input.type = "text";
     input.value = currentText;
-    input.className = 'edit-input';
-    input.style.borderRadius = '1em';
-    
+    input.className = "edit-input";
+    input.style.borderRadius = "1em";
+
     taskText.replaceWith(input);
     input.focus();
-    
-    input.addEventListener('blur', () => {
+    //
+    input.addEventListener("blur", () => {
       const newText = input.value.trim();
       if (newText) {
-        const newTaskText = document.createElement('div');
-        newTaskText.className = 'task-li';
-        newTaskText.textContent = newText;
+        const newTaskText = document.createElement("div");
+        newTaskText.className = "task-li";
+        newTaskText.textContent = prevText;
         input.replaceWith(newTaskText);
       } else {
         task.remove();
       }
     });
-    
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        input.blur();
-      }
+
+    //escape on 'esc'
+    taskIn.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") input.blur();
+    });
+
+    //task added on 'Enter'
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") input.blur();
     });
   });
-
+  //delete task
   del.addEventListener("click", () => {
     task.remove();
   });
@@ -86,13 +91,36 @@ taskIn.addEventListener("keydown", (e) => {
   if (e.key === "Enter") makeTask();
 });
 
-
 //search task
+function search() {
+  const searchIn = document.getElementById("search-in");
+
+  searchIn.addEventListener("input", (e) => {
+    const textIn = e.target.value.toLowerCase().trim();
+    const tasks = taskList.querySelectorAll("li");
+
+  
+    tasks.forEach((task) => {
+      if (tasks.includes(textIn)) {
+        task.style.display = "";
+      } else {
+        task.style.display = "none";
+      }
+    });
+  });
+}
+
+search();
+
+//storing data locally
+const data = {};
+const tasks = document.querySelectorAll("ul li");
+tasks.forEach((task) => {});
 
 //typewriter effect
 const title = document.querySelector("h1");
 const titleTxt = "It doesn't have to be pretty.";
-title.classList.add('blink');
+title.classList.add("blink");
 let i = 0;
 function typewriter() {
   if (i < titleTxt.length) {
