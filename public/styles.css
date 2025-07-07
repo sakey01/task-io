@@ -267,7 +267,6 @@ button:hover {
   overflow: hidden;
 }
 
-/* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -351,23 +350,16 @@ ul li span i:hover {
 
 /* Edit input styling */
 .edit-input {
-  background-color: var(--input-bg) !important;
-  color: var(--text-primary) !important;
-  border: 2px solid var(--accent) !important;
-  border-radius: 15px !important;
-  padding: 0.5rem !important;
-  font-size: 1rem !important;
-  outline: none !important;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--accent);
+  border-radius: 50px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  outline: none;
   flex: 1;
 }
 
-.edit-input:focus {
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2) !important;
-}
-
-.light .edit-input:focus {
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2) !important;
-}
 
 .blink::after {
   content: "|";
