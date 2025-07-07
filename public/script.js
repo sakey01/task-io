@@ -134,7 +134,11 @@ function addTask() {
 
 addBtn.addEventListener("click", addTask);
 taskIn.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") addTask();
+  // Only add task if Enter is pressed and the event target is the main input
+  if (e.key === "Enter" && e.target === taskIn) {
+    e.preventDefault();
+    addTask();
+  }
 });
 
 // ===== Theme Management =====

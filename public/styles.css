@@ -54,6 +54,15 @@ body {
   min-height: 100vh;
 }
 
+body.light {
+  --button-bg: #fff;
+  --button-hover-bg: #e0e0e0;
+}
+
+.button-icon:hover i {
+  color: #222;
+}
+
 h1 {
   font-size: 3.2rem;
   text-align: center;
