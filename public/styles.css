@@ -72,13 +72,12 @@ h1 {
   text-shadow: 0 2px 4px var(--shadow);
 }
 
-.nav-brand {
+.nav-left {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.nav-brand a {
+.nav-left a {
   display: flex;
   align-items: center;
   color: var(--text-primary);
@@ -88,16 +87,15 @@ h1 {
   transition: all 0.3s ease;
 }
 
-.nav-brand a:hover {
+.nav-left a:hover {
   background-color: var(--accent);
   color: white;
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 .nav-right {
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin-left: auto;
   gap: 1em;
 }
@@ -132,21 +130,6 @@ main {
   margin-top: 5%;
   place-items: center;
   padding: 0 2rem;
-}
-
-.task-input-section {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.task-list-section {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 input {
@@ -191,14 +174,11 @@ nav input {
   border-radius: 0;
   border: none;
   background: transparent;
-  flex: 1;
 }
 
 #add {
   padding: 1rem 2rem;
   border-radius: 0;
-  font-size: 1rem;
-  white-space: nowrap;
   border-left: 1px solid var(--border);
   transform: none;
 }
@@ -224,7 +204,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+
   border: none;
   box-shadow: none;
   position: relative;
@@ -232,7 +212,7 @@ button {
 
 .button-icon:hover {
   background: var(--accent);
-  transform: scale(1.1);
+  transform: scale(1.02);
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
@@ -265,16 +245,22 @@ button:hover {
 
 .add-task-box {
   display: flex;
-  gap: 0;
-  padding: 0;
   background: var(--task-bg);
   border: 1px solid var(--task-border);
   border-radius: 25px;
   backdrop-filter: blur(10px);
-  width: 60vw;
-  max-width: 600px;
+  max-width: 600vw;
   overflow: hidden;
 }
+
+h1 {
+  font-size: 2.5rem;
+}
+
+.task-li {
+  font-size: 0.95rem;
+}
+
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -304,26 +290,18 @@ ul {
 }
 
 #task-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  gap: 4rem;
   width: 100%;
-  min-width: 0;
 }
+
 .task-li {
   flex: 1 1 auto;
-  overflow: visible;
-  text-overflow: unset;
   white-space: normal;
   word-break: break-word;
-  min-width: 0;
 }
+
 #task-list li span {
-  display: flex;
-  flex-shrink: 0;
-  gap: 0.25rem;
-  align-items: center;
+  gap: 0.6rem;
 }
 
 ul li {
@@ -335,6 +313,7 @@ ul li {
   align-items: center;
   width: 100%;
   gap: 2rem;
+  justify-content: center;
   text-decoration: none;
   transition: all 0.3s ease;
   background: var(--task-bg);
@@ -349,8 +328,6 @@ ul li:hover {
 ul li div {
   display: flex;
   flex-wrap: wrap;
-  flex: 1;
-  font-size: 1.1rem;
 }
 
 ul li span {
@@ -364,7 +341,6 @@ ul li span {
 ul li span i {
   transition: all 0.3s ease;
   color: var(--text-secondary);
-  background: transparent;
   width: 40px;
   height: 40px;
   display: flex;
@@ -428,13 +404,10 @@ ul li span i:hover {
 #contrast-icon {
   color: var(--text-primary);
   transition: all 0.4s ease;
-  padding: 0.75rem;
+  padding: 0.6rem;
   border-radius: 15px;
   background: var(--input-bg);
   border: 2px solid var(--border);
-  margin-left: 0;
-  order: 0;
-  margin-bottom: 0;
   align-self: auto;
 }
 
@@ -478,19 +451,20 @@ input[type="search"]::-moz-search-clear {
 
   .add-task-box {
     flex-direction: column;
-    gap: 0.5rem;
   }
 
   h1 {
     font-size: 2.5rem;
   }
 
+  .task-li {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 500px) {
   #task-list li {
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .task-li {
-    font-size: 0.95rem;
   }
 }
