@@ -76,8 +76,6 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
 }
 
 .nav-brand a {
@@ -98,8 +96,10 @@ h1 {
 
 .nav-right {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  margin-left: auto;
+  gap: 0.5rem;
 }
 
 nav {
@@ -303,6 +303,29 @@ ul {
   padding: 1rem 0;
 }
 
+#task-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
+}
+.task-li {
+  flex: 1 1 auto;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+  word-break: break-word;
+  min-width: 0;
+}
+#task-list li span {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.25rem;
+  align-items: center;
+}
+
 ul li {
   display: flex;
   padding: 1rem 2rem;
@@ -369,7 +392,6 @@ ul li span i:hover {
   flex: 1;
 }
 
-
 .blink::after {
   content: "|";
   color: var(--accent);
@@ -409,6 +431,10 @@ ul li span i:hover {
   border-radius: 15px;
   background: var(--input-bg);
   border: 2px solid var(--border);
+  margin-left: 0;
+  order: 0;
+  margin-bottom: 0;
+  align-self: auto;
 }
 
 #contrast-icon:hover {
@@ -416,6 +442,18 @@ ul li span i:hover {
   color: white;
   transform: rotate(180deg) scale(1.1);
   border-color: var(--accent);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+input[type="search"]::-ms-clear {
+  display: none;
+}
+input[type="search"]::-moz-search-clear {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -432,8 +470,86 @@ ul li span i:hover {
   ul li {
     width: 80vw;
   }
+}
+
+@media (max-width: 600px) {
+  .nav-right {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #contrast-icon {
+    order: 0;
+    margin-bottom: 0;
+    align-self: auto;
+  }
+  #search-container {
+    width: auto;
+  }
+
+  #search-in {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+  }
+
+  .task-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #task-in {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  #add {
+    width: 100%;
+    font-size: 1rem;
+  }
 
   h1 {
     font-size: 2.5rem;
+  }
+
+  .task-list-section {
+    padding: 0 0.5rem;
+  }
+
+  .task-li {
+    font-size: 1rem;
+  }
+
+  .button-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  #task-list li {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #task-list li span {
+    margin-top: 0.25rem;
+    align-self: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  nav {
+    padding: 0.5rem;
+  }
+  .nav-brand span {
+    font-size: 1.1rem;
+  }
+  .task-li {
+    font-size: 0.95rem;
+  }
+  .button-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
 }

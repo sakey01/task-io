@@ -71,8 +71,18 @@ function createTaskElement(text, completed = false) {
       input.select();
     } else return;
 
+    let editHandled = false;
+    function handleEditReplace(newText) {
+      if (editHandled) return;
+      editHandled = true;
+      const newTaskText = document.createElement("div");
+      newTaskText.className = "task-li";
+      newTaskText.textContent = newText;
+      input.replaceWith(newTaskText);
+      return newText;
+    }
+
     function saveEdit(newText) {
-      // Find the index of this task in the tasks array
       const index = Array.from(taskList.children).indexOf(task);
       if (index !== -1) {
         tasks[index].text = newText;
@@ -84,25 +94,16 @@ function createTaskElement(text, completed = false) {
       if (e.key === "Enter") {
         const newText = input.value.trim();
         if (newText) {
-          const newTaskText = document.createElement("div");
-          newTaskText.className = "task-li";
-          newTaskText.textContent = newText;
-          input.replaceWith(newTaskText);
+          handleEditReplace(newText);
           saveEdit(newText);
         }
       } else if (e.key === "Escape") {
-        const newTaskText = document.createElement("div");
-        newTaskText.className = "task-li";
-        newTaskText.textContent = currentText;
-        input.replaceWith(newTaskText);
+        handleEditReplace(currentText);
       }
     });
     input.addEventListener("blur", () => {
       const newText = input.value.trim();
-      const newTaskText = document.createElement("div");
-      newTaskText.className = "task-li";
-      newTaskText.textContent = newText || currentText;
-      input.replaceWith(newTaskText);
+      handleEditReplace(newText || currentText);
       if (newText) saveEdit(newText);
     });
   });
