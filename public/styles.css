@@ -60,7 +60,11 @@ body.light {
 }
 
 .button-icon:hover i {
-  color: #222;
+  color: white;
+}
+
+.light .button-icon:hover i {
+  color: white;
 }
 
 h1 {
@@ -204,15 +208,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: none;
   box-shadow: none;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .button-icon:hover {
   background: var(--accent);
-  transform: scale(1.02);
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
@@ -251,10 +254,6 @@ button:hover {
   backdrop-filter: blur(10px);
   max-width: 600vw;
   overflow: hidden;
-}
-
-h1 {
-  font-size: 2.5rem;
 }
 
 .task-li {
@@ -340,16 +339,26 @@ ul li span {
 
 ul li span i {
   transition: all 0.3s ease;
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  background: transparent;
   width: 40px;
   height: 40px;
   display: flex;
   align-content: center;
+  font-size: 1.2rem;
+}
+
+.light ul li span i {
+  color: white;
 }
 
 ul li span i:hover {
   color: var(--accent);
   transform: scale(1.1);
+}
+
+.light ul li span i:hover {
+  color: var(--text-secondary);
 }
 
 .clickable {
