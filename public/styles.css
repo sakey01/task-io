@@ -177,7 +177,6 @@ nav input {
   padding: 1rem 1.5rem;
   border-radius: 0;
   border: none;
-  background: transparent;
 }
 
 #add {
@@ -206,16 +205,11 @@ button {
   width: 40px;
   height: 40px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
   box-shadow: none;
-  position: relative;
   transition: all 0.3s ease;
 }
 
 .button-icon:hover {
-  background: var(--accent);
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
@@ -339,17 +333,11 @@ ul li span {
 
 ul li span i {
   transition: all 0.3s ease;
-  color: var(--text-primary);
-  background: transparent;
   width: 40px;
   height: 40px;
   display: flex;
   align-content: center;
   font-size: 1.2rem;
-}
-
-.light ul li span i {
-  color: white;
 }
 
 ul li span i:hover {
