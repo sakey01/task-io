@@ -3,35 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A to do list" />
-    <title>Task.io</title>
+    <meta
+      name="description"
+      content="Task.io - A modern task management app with dark and light themes."
+    />
+    <meta
+      name="keywords"
+      content="task manager, todo list, productivity, task organization, dark mode, light mode"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" />
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="preload" href="script.js" as="script" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-     <link rel="icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap" />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
+    <title>Task.io - Task Management App</title>
   </head>
 
   <body>
     <header>
       <nav>
-        <i class="material-icons">git</i>
-        <i id="dark-mode" class="material-icons clickable">contrast</i>
-        <div id="search-container" class="container">
-          <i id="search-icon" class="material-icons">search</i>
-          <input id="search-in" name="search" type="text" placeholder="Search" autocomplete="off"/>
+        <div class="nav-brand">
+          <a href="https://github.com/sakey01" target="_blank" rel="noopener noreferrer">
+            <i class="material-icons">code</i>
+          </a>
+          <span>Task.io</span>
+        </div>
+
+        <div class="nav-right">
+          <div id="search-container" class="container">
+            <i id="search-icon" class="material-icons">search</i>
+            <input
+              id="search-in"
+              name="search"
+              type="search"
+              placeholder="Search tasks..."
+              autocomplete="off"
+            />
+          </div>
+
+          <button id="contrast-icon" class="material-icons clickable">contrast</button>
         </div>
       </nav>
     </header>
 
     <main>
-      <h1></h1>
+      <h1 id="main-title"></h1>
+      <section class="task-input-section">
+        <div class="container task-bar">
+          <input
+            id="task-in"
+            name="task"
+            type="text"
+            placeholder="Add a new task..."
+            autocomplete="off"
+            required
+          />
+          <button id="add" type="button">Add</button>
+        </div>
+      </section>
 
-      <div class="container task-bar">
-        <input id="task-in" name="task" type="text" placeholder="Add Tasks" autocomplete="off"/>
-        <button id="add">Add</button>
-      </div>
-
-      <ul id="task-list"></ul>
+      <section class="task-list-section">
+        <ul id="task-list"></ul>
+      </section>
     </main>
   </body>
 </html>
