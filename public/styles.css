@@ -6,7 +6,6 @@
 
 :root {
   --bg-primary: #0a0a0a;
-  --bg-secondary: #1a1a1a;
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
   --accent: #ff6b6b;
@@ -55,6 +54,7 @@ body {
 }
 
 body.light {
+  color: var(--text-primary);
   --button-bg: #fff;
   --button-hover-bg: #e0e0e0;
 }
@@ -120,7 +120,7 @@ nav div {
 
 #search-icon {
   position: absolute;
-  left: 15px;
+  left: 14px;
   opacity: 0.7;
   color: var(--text-secondary);
   z-index: 2;
@@ -263,7 +263,7 @@ button:hover {
   backdrop-filter: blur(10px);
 }
 
-.task-bar {
+.add-task-box {
   display: flex;
   gap: 0;
   padding: 0;
@@ -463,12 +463,12 @@ input[type="search"]::-moz-search-clear {
     gap: 1rem;
   }
 
-  #task-in,
-  ul li {
-    width: 80vw;
+  nav div span {
+    display: none;
   }
+
   .nav-right {
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
   #search-in {
@@ -476,7 +476,7 @@ input[type="search"]::-moz-search-clear {
     min-width: 0;
   }
 
-  .task-bar {
+  .add-task-box {
     flex-direction: column;
     gap: 0.5rem;
   }
