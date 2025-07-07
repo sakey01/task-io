@@ -380,16 +380,17 @@ ul li span i:hover {
   cursor: pointer;
 }
 
-/* Edit input styling */
 .edit-input {
-  background-color: var(--input-bg);
-  color: var(--text-primary);
-  border: 2px solid var(--accent);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 2px solid var(--border, #ccc);
   border-radius: 50px;
-  padding: 0.8rem;
-  font-size: 1rem;
   outline: none;
-  flex: 1;
+}
+.edit-input:focus {
+  border-color: var(--accent, #1d9bf0);
 }
 
 .blink::after {
