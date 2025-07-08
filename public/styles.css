@@ -398,6 +398,16 @@ ul li span i:hover {
   color: var(--text-secondary);
 }
 
+.dim .button-icon {
+  opacity: 0.5;
+  filter: grayscale(50%);
+}
+
+.dim .button-icon:hover {
+  opacity: 0.7;
+  filter: grayscale(30%);
+}
+
 #contrast-icon {
   color: var(--text-primary);
   transition: all 0.4s ease;
