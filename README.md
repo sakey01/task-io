@@ -30,6 +30,6 @@ A clean and responsive web-based to-do list app that lets you add, edit, delete,
 ---
 
 ## Screenshots
-<img width="1234" alt="Screenshot 2025-07-07 at 21 03 09" src="https://github.com/user-attachments/assets/69933c38-a120-4051-bdbf-87351cde2ca9" />
+![Screenshot 2025-07-08 001848](https://github.com/user-attachments/assets/7ed043f7-2724-4cff-8676-40c4a48adb78)
 
-
+![image](https://github.com/user-attachments/assets/18ed4015-87d6-4bb8-988b-d28cd6ad9df3)
