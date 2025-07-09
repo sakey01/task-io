@@ -21,9 +21,10 @@ function loadTasks() {
   }
 }
 
+// Loads previously saved tasks
 function renderTasks() {
   taskList.innerHTML = "";
-  tasks.forEach(task => createTaskElement(task.text, task.completed));
+  tasks.forEach((task) => createTaskElement(task.text, task.completed));
 }
 
 function createTaskElement(text, completed = false) {
@@ -57,7 +58,7 @@ function createTaskElement(text, completed = false) {
     saveTasks();
   });
 
-  // Edit button click
+  // Edit button, listener
   edit.addEventListener("click", () => {
     const taskText = task.querySelector(".task-li");
     const currentText = taskText.textContent;
@@ -118,12 +119,12 @@ function createTaskElement(text, completed = false) {
     task.style.opacity = "0";
     setTimeout(() => {
       task.remove();
-      tasks = tasks.filter(t => t.text !== text || t.completed !== completed);
+      tasks = tasks.filter((t) => t.text !== text || t.completed !== completed);
       saveTasks();
     }, 300);
   });
 }
-
+// Adds task and resets input
 function addTask() {
   const text = taskIn.value.trim();
   if (text === "") return;
@@ -135,14 +136,14 @@ function addTask() {
 
 addBtn.addEventListener("click", addTask);
 taskIn.addEventListener("keydown", (e) => {
-  // Only add task if Enter is pressed and the event target is the main input
+  // 'Enter' adds task
   if (e.key === "Enter" && e.target === taskIn) {
     e.preventDefault();
     addTask();
   }
 });
 
-// ===== Theme Management =====
+// Themes
 const themeToggle = document.getElementById("contrast-icon");
 const body = document.querySelector("body");
 themeToggle.addEventListener("click", () => {
@@ -150,7 +151,7 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
 });
 
-// ===== Search Functionality =====
+// Search functionality
 const searchIn = document.getElementById("search-in");
 searchIn.addEventListener("input", (e) => {
   const searchText = e.target.value.toLowerCase().trim();
@@ -173,7 +174,7 @@ searchIn.addEventListener("input", (e) => {
   });
 });
 
-// ===== Typewriter Effect =====
+// Typewriter Effect
 function typewriter() {
   const title = document.querySelector("h1");
   const titleTxt = "It doesn't have to be pretty.";
@@ -190,7 +191,7 @@ function typewriter() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Theme
+  // Dark/ligth theme
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") body.classList.add("light");
   // Tasks
