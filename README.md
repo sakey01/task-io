@@ -33,3 +33,8 @@ A clean and responsive web-based to-do list app that lets you add, edit, delete,
 ![Screenshot 2025-07-08 001848](https://github.com/user-attachments/assets/7ed043f7-2724-4cff-8676-40c4a48adb78)
 
 ![image](https://github.com/user-attachments/assets/18ed4015-87d6-4bb8-988b-d28cd6ad9df3)
+
+
+## License
+
+This project is licensed under the MIT License.
