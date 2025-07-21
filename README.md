@@ -1,6 +1,6 @@
 # Simple To-Do List Web App
 
-A to-do list app where you can add, edit, delete, search, and filter tasks. Your tasks are stored locally so you can come back to it
+A to-do list app where you can add, edit, delete, search, and filter tasks. Your tasks are stored locally so you can always come back to it
 
 ---
 
